@@ -1,6 +1,7 @@
-# SirenApi
-REST API to get company informations thanks to siren number
-It use an other REST API to get outputs informations ([sirene API](https://api.gouv.fr/les-api/sirene_v3))
+# CompaniesWater
+REST API to know if there is water shortage in french company departement
+First api used is [sirene API](https://api.gouv.fr/les-api/sirene_v3) to get company's department  
+Second is [VigiEau](https://vigieau.gouv.fr/) to know if ther is wather shortage in the department
 
 ## Endpoints
 /api/siren?siren={siren}&api-version={version}
@@ -14,5 +15,6 @@ It use an other REST API to get outputs informations ([sirene API](https://api.g
 #### outputs :
 | param | description | sample |
 | ----- | ----------- | ------ |
-| siren | entity siren | 972105410 |
-| version | api version | 1.0 |
+| department | department fullname | Gironde |
+| isShortage | boolean to see if ther is a shortage | true |
+| gravity | shortage gravity | alerte_renforcee |
