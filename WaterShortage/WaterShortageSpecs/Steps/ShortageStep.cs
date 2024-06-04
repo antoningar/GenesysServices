@@ -1,8 +1,10 @@
-namespace ComapniesWaterSpecs.Steps;
+namespace WeatherShortageSpecs.Steps;
 
 [Binding]
 public class ShortageStep
 {
+    private readonly ApiFactory _api = new();
+    
     [Given(@"SIREN api is down")]
     public void GivenSirenApiIsDown()
     {

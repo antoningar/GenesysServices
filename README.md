@@ -1,7 +1,7 @@
-# CompaniesWater
+# WaterShortage
 REST API to know if there is water shortage in french company departement
 First api used is [sirene API](https://api.gouv.fr/les-api/sirene_v3) to get company's department  
-Second is [VigiEau](https://vigieau.gouv.fr/) to know if ther is wather shortage in the department
+Second is [VigiEau](https://api.vigieau.beta.gouv.fr/swagger) to know if ther is wather shortage in the department
 
 ## Endpoints
 /api/siren?siren={siren}&api-version={version}
