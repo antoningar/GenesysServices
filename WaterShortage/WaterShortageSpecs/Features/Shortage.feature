@@ -1,8 +1,8 @@
 Feature: Shortage
-Get Shortage by SIREN
+Get Shortage by SIRET
 
-    Scenario: SIREN error
-        Given SIREN api is down
+    Scenario: SIRET error
+        Given SIRET api is down
         When I would like to know if my companies is vulnerable to water shortage in my region
         Then I got a response <responseCode>
     

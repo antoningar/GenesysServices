@@ -2,11 +2,11 @@ using WaterShortageApi.Models;
 
 namespace WaterShortageApi.Services;
 
-public class ApiShortage(ISirenService _sirenService, IWaterService _waterService) : IApiShortage
+public class ApiShortage(ISiretService siretService, IWaterService _waterService) : IApiShortage
 {
-    public async Task<ShortageResponse> GetShortageAsync(string siren)
+    public async Task<ShortageResponse> GetShortageAsync(string siret)
     {
-        string codeRegion = await _sirenService.GetCodeRegionBySirenAsync(siren);
+        string codeRegion = await siretService.GetCodeRegionBySiretAsync(siret);
         return await _waterService.GetRegionGravityByCodeAsync(codeRegion);
     }
 }

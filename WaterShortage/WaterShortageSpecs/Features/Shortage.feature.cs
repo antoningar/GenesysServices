@@ -39,7 +39,7 @@ namespace WeatherShortageSpecs.Features
         public static async System.Threading.Tasks.Task FeatureSetupAsync()
         {
             testRunner = global::Reqnroll.TestRunnerManager.GetTestRunnerForAssembly(null, global::Reqnroll.xUnit.ReqnrollPlugin.XUnitParallelWorkerTracker.Instance.GetWorkerId());
-            global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Shortage", "Get Shortage by SIREN", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+            global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Shortage", "Get Shortage by SIRET", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
             await testRunner.OnFeatureStartAsync(featureInfo);
         }
         
@@ -86,16 +86,16 @@ namespace WeatherShortageSpecs.Features
             await this.TestTearDownAsync();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="SIREN error")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="SIRET error")]
         [Xunit.TraitAttribute("FeatureTitle", "Shortage")]
-        [Xunit.TraitAttribute("Description", "SIREN error")]
+        [Xunit.TraitAttribute("Description", "SIRET error")]
         [Xunit.InlineDataAttribute("500", new string[0])]
-        public async System.Threading.Tasks.Task SIRENError(string responseCode, string[] exampleTags)
+        public async System.Threading.Tasks.Task SIRETError(string responseCode, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("responseCode", responseCode);
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("SIREN error", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("SIRET error", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -107,7 +107,7 @@ namespace WeatherShortageSpecs.Features
             {
                 await this.ScenarioStartAsync();
 #line 5
-        await testRunner.GivenAsync("SIREN api is down", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+        await testRunner.GivenAsync("SIRET api is down", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 6
         await testRunner.WhenAsync("I would like to know if my companies is vulnerable to water shortage in my region" +

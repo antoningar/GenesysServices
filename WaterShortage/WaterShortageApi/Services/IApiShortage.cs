@@ -4,5 +4,5 @@ namespace WaterShortageApi.Services;
 
 public interface IApiShortage
 {
-    public Task<ShortageResponse> GetShortageAsync(string siren);
+    public Task<ShortageResponse> GetShortageAsync(string siret);
 }

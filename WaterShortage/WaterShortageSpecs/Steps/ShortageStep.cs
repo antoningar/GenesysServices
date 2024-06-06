@@ -11,21 +11,21 @@ public class ShortageStep
     private readonly ApiFactory _api = new();
     private HttpResponseMessage? _response; 
     
-    [Given(@"SIREN api is down")]
-    public void GivenSirenApiIsDown()
+    [Given(@"SIRET api is down")]
+    public void GivenSiretApiIsDown()
     {
-        Mock<ISirenService> mockService = new();
+        Mock<ISiretService> mockService = new();
         mockService
-            .Setup(s => s.GetCodeRegionBySirenAsync(It.IsAny<string>()))
-            .Throws(new Exception("External SIREN service down"));
-        _api.SirenService = mockService.Object;
+            .Setup(s => s.GetCodeRegionBySiretAsync(It.IsAny<string>()))
+            .Throws(new Exception("External SIRET service down"));
+        _api.SiretService = mockService.Object;
     }
 
     [When(@"I would like to know if my companies is vulnerable to water shortage in my region")]
     public async Task WhenIWouldLikeToKnowIfMyCompaniesIsVulnerableToWaterShortageInMyRegion()
     {
         HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
-        _response = await client.GetAsync("/api/watershortage?siren=972105410&api-version=1.0");
+        _response = await client.GetAsync("/api/watershortage?siret=972105410&api-version=1.0");
     }
 
     [Given(@"Water api is down")]
@@ -41,11 +41,11 @@ public class ShortageStep
     [Given(@"My company operate in (.*)")]
     public void GivenMyCompanyOperateIn(string postalCode)
     {
-        Mock<ISirenService> mockService = new();
+        Mock<ISiretService> mockService = new();
         mockService
-            .Setup(s => s.GetCodeRegionBySirenAsync(It.IsAny<string>()))
+            .Setup(s => s.GetCodeRegionBySiretAsync(It.IsAny<string>()))
             .Returns(Task.FromResult("972105410"));
-        _api.SirenService = mockService.Object;
+        _api.SiretService = mockService.Object;
     }
 
     [Given(@"There is a a (.*) shortage")]

@@ -8,14 +8,14 @@ namespace WeatherShortageSpecs;
 
 public class ApiFactory : WebApplicationFactory<Program>
 {
-    public ISirenService SirenService = new Mock<ISirenService>().Object;
+    public ISiretService SiretService = new Mock<ISiretService>().Object;
     public IWaterService WaterService = new Mock<IWaterService>().Object;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>
         {
-            services.AddSingleton<ISirenService>(s => SirenService);
+            services.AddSingleton<ISiretService>(s => SiretService);
             services.AddSingleton<IWaterService>(s => WaterService);
         });
     }
