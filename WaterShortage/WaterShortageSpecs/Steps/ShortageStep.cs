@@ -25,7 +25,7 @@ public class ShortageStep
     public async Task WhenIWouldLikeToKnowIfMyCompaniesIsVulnerableToWaterShortageInMyRegion()
     {
         HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
-        _response = await client.GetAsync("/api/watershortage?siret=972105410&api-version=1.0");
+        _response = await client.GetAsync("/api/v1/watershortage?siret=972105410");
     }
 
     [Given(@"Water api is down")]
