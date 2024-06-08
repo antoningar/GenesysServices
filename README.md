@@ -1,3 +1,7 @@
+# Intro
+This REST API service was thought to be used by a Genesys Cloud Data ACtion.  
+With services like this, you can do multiple REST calls (two here) with specific logics outside your flows.
+
 # WaterShortage
 REST API to know if there is water shortage in french company departement
 First api used is [sirene API](https://api.gouv.fr/les-api/sirene_v3) to get company's department  
