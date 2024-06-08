@@ -1,5 +1,8 @@
 using System.Net;
 using System.Net.Http.Headers;
+using Asp.Versioning;
+using Asp.Versioning.Builder;
+using Asp.Versioning.Conventions;
 using Microsoft.AspNetCore.Mvc;
 using WaterShortageApi.Models;
 using WaterShortageApi.Services;
@@ -13,6 +16,17 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services
+    .AddApiVersioning(options =>
+    {
+        options.DefaultApiVersion = new ApiVersion(1);
+        options.ApiVersionReader = new UrlSegmentApiVersionReader();
+    })
+    .AddApiExplorer(options =>
+    {
+        options.GroupNameFormat = "'v'V"; //usefull for swagger
+        options.SubstituteApiVersionInUrl = true;
+    });
 
 builder.Services.AddSingleton<ISiretService, SiretService>();
 builder.Services.AddSingleton<IWaterService, WaterService>();
@@ -38,6 +52,12 @@ builder.Services.AddHttpClient("Water", client =>
 
 WebApplication app = builder.Build();
 
+ApiVersionSet versionSet = app
+    .NewApiVersionSet()
+    .HasApiVersion(1)
+    .ReportApiVersions()
+    .Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -46,7 +66,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/api/watershortage", async Task<IResult> (string siret, IApiShortage service) =>
+app.MapGet("/api/v{apiVersion:apiVersion}/watershortage", async Task<IResult> (string siret, IApiShortage service) =>
 {
     try
     {
@@ -66,6 +86,8 @@ app.MapGet("/api/watershortage", async Task<IResult> (string siret, IApiShortage
     }
 })
 .WithName("GetWaterShortage")
+.WithApiVersionSet(versionSet)
+.MapToApiVersion(1)
 .Produces<ShortageResponse>()
 .WithOpenApi();
 
