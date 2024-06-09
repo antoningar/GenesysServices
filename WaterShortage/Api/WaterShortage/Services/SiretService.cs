@@ -1,19 +1,22 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace WaterShortageApi.Services;
+namespace Api.WaterShortage.Services;
 
-public class SiretService(IHttpClientFactory _httpClientFactory) : ISiretService
+public class SiretService(IHttpClientFactory httpClientFactory) : ISiretService
 {
-    private readonly HttpClient _httpClient = _httpClientFactory.CreateClient("Siret");
+    private readonly HttpClient _httpClient = httpClientFactory.CreateClient("Siret");
     public async Task<string> GetCodeRegionBySiretAsync(string siret)
     {
         if (string.IsNullOrWhiteSpace(siret))
         {
             throw new ArgumentException("Wrong siret parameter");
         }
-
-        await SetTokenAsync();
+        
+        if (!string.Equals("Bearer", _httpClient.DefaultRequestHeaders.Authorization!.Scheme))
+        {
+            await SetTokenAsync();
+        }
         
         return await GetCodeRegion(siret);
     }

@@ -1,8 +1,8 @@
+using Api.WaterShortage.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using WaterShortageApi.Services;
 
 namespace WeatherShortageSpecs;
 

@@ -1,11 +1,11 @@
 using System.Text.Json;
-using WaterShortageApi.Models;
+using Api.WaterShortage.Models;
 
-namespace WaterShortageApi.Services;
+namespace Api.WaterShortage.Services;
 
-public class WaterService(IHttpClientFactory _httpClientFactory) : IWaterService
+public class WaterService(IHttpClientFactory httpClientFactory) : IWaterService
 {
-    private readonly HttpClient _httpClient = _httpClientFactory.CreateClient("Water");
+    private readonly HttpClient _httpClient = httpClientFactory.CreateClient("Water");
     public async Task<ShortageResponse> GetRegionGravityByCodeAsync(string code)
     {
         if (string.IsNullOrWhiteSpace(code))
@@ -24,7 +24,7 @@ public class WaterService(IHttpClientFactory _httpClientFactory) : IWaterService
         WaterShortageRegion[]? result = await JsonSerializer.DeserializeAsync<WaterShortageRegion[]>(contentStream);
 
         return result!
-            .Where(r => string.Equals(r.code, code.Substring(0, 2)))
+            .Where(r => string.Equals(r.code, code[..2]))
             .Select(r => new ShortageResponse(
                 r.nom,
                 !string.IsNullOrWhiteSpace(r.niveauGraviteMax),
