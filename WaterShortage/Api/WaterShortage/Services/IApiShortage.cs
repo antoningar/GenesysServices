@@ -1,6 +1,6 @@
-using WaterShortageApi.Models;
+using Api.WaterShortage.Models;
 
-namespace WaterShortageApi.Services;
+namespace Api.WaterShortage.Services;
 
 public interface IApiShortage
 {

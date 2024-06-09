@@ -1,4 +1,4 @@
-namespace WaterShortageApi.Services;
+namespace Api.WaterShortage.Services;
 
 public interface ISiretService
 {

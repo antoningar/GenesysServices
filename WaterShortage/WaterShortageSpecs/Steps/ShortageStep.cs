@@ -1,6 +1,6 @@
+using Api.WaterShortage.Models;
+using Api.WaterShortage.Services;
 using Moq;
-using WaterShortageApi.Models;
-using WaterShortageApi.Services;
 using Xunit;
 
 namespace WeatherShortageSpecs.Steps;
