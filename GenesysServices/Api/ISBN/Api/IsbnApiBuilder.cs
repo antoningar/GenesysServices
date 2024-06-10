@@ -7,6 +7,11 @@ namespace Api.ISBN.Api;
 
 public static class IsbnApiBuilder
 {
+    public static void ConfigureIsbn(this WebApplicationBuilder builder, IConfigurationRoot configuration)
+    {
+        builder.Services.AddSingleton<IIsbnService, IsbnService>();
+    }
+    
     public static void MapIsbnEndpoints(this WebApplication app, ApiVersionSet versionSet)
     {
         app.MapGet("/api/v{apiVersion:apiVersion}/isbn", async Task<IResult> (string isbn, IIsbnService service) =>

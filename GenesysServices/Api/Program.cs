@@ -27,6 +27,7 @@ builder.Services
     });
 
 builder.ConfigureWaterShortage(configuration);
+builder.ConfigureIsbn(configuration);
 
 WebApplication app = builder.Build();
 
