@@ -1,3 +1,4 @@
+using Api.ISBN.Api;
 using Api.WaterShortage.Api;
 using Asp.Versioning;
 using Asp.Versioning.Builder;
@@ -26,6 +27,7 @@ builder.Services
     });
 
 builder.ConfigureWaterShortage(configuration);
+builder.ConfigureIsbn(configuration);
 
 WebApplication app = builder.Build();
 
@@ -42,7 +44,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.MapWaterShortageEndpoints(versionSet);
+app.MapIsbnEndpoints(versionSet);
+
 app.Run();
 
 public partial class Program
