@@ -21,7 +21,7 @@
     <PackageReference Include="FluentAssertions" Version="6.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Features\ISBNFeature.feature" />
+    <Content Include="Features\*.feature" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Api\Api.csproj" />

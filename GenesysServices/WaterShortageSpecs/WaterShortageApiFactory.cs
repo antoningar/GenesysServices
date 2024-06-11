@@ -6,7 +6,7 @@ using Moq;
 
 namespace WeatherShortageSpecs;
 
-public class ApiFactory : WebApplicationFactory<Program>
+public class WaterShortageApiFactory : WebApplicationFactory<Program>
 {
     public ISiretService SiretService = new Mock<ISiretService>().Object;
     public IWaterService WaterService = new Mock<IWaterService>().Object;

@@ -6,7 +6,7 @@ using Moq;
 
 namespace ISBNSpecs;
 
-public class ApiFactory : WebApplicationFactory<Program>
+public class IsbnApiFactory : WebApplicationFactory<Program>
 {
     public IIsbnService IsbnService = new Mock<IIsbnService>().Object;
     
@@ -17,5 +17,4 @@ public class ApiFactory : WebApplicationFactory<Program>
             services.AddSingleton<IIsbnService>(s => IsbnService);
         });
     }
-    
 }
