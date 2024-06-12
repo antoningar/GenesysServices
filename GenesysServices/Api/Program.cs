@@ -1,3 +1,4 @@
+using Api.Client.Api;
 using Api.ISBN.Api;
 using Api.WaterShortage.Api;
 using Asp.Versioning;
@@ -28,6 +29,7 @@ builder.Services
 
 builder.ConfigureWaterShortage(configuration);
 builder.ConfigureIsbn(configuration);
+builder.ConfigureClient(configuration);
 
 WebApplication app = builder.Build();
 
@@ -47,6 +49,7 @@ app.UseHttpsRedirection();
 
 app.MapWaterShortageEndpoints(versionSet);
 app.MapIsbnEndpoints(versionSet);
+app.MapClientEndpoints(versionSet);
 
 app.Run();
 

@@ -1,20 +1,20 @@
-using Api.ISBN.Services;
+using Api.Client.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace ISBNSpecs;
+namespace ClientSpecs;
 
-public class ApiFactory : WebApplicationFactory<Program>
-{
-    public IIsbnService IsbnService = new Mock<IIsbnService>().Object;
+public class ClientApiFactory : WebApplicationFactory<Program>
+{    
+    public IDataClientService DataClientService = new Mock<IDataClientService>().Object;
     
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>
         {
-            services.AddSingleton<IIsbnService>(s => IsbnService);
+            services.AddSingleton<IDataClientService>(s => DataClientService);
         });
     }
     

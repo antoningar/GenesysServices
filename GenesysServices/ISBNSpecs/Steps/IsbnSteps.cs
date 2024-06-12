@@ -6,10 +6,10 @@ using Xunit;
 namespace ISBNSpecs.Steps;
 
 [Binding]
-public class IsbnStep
+public class IsbnSteps
 {
     private string _isbn = string.Empty;
-    private readonly ApiFactory _api = new();
+    private readonly IsbnApiFactory _isbnApi = new();
     private HttpResponseMessage? _response; 
     
     [Given(@"an ISBN (.*)")]
@@ -26,13 +26,13 @@ public class IsbnStep
             .Setup(s => s.CheckIsbnAsync(It.IsAny<string>()))
             .ReturnsAsync(valid);
         
-        _api.IsbnService = service.Object;
+        _isbnApi.IsbnService = service.Object;
     }
     
     [When(@"I check if my ISBN is valid")]
     public async Task WhenICheckIfMyIsbnIsValid()
     {
-        HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
+        HttpClient client = _isbnApi.CreateDefaultClient(new Uri("http://localhost/"));
         _response = await client.GetAsync($"/api/v1/isbn?isbn={_isbn}");
     }
     
