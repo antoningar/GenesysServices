@@ -1,4 +1,6 @@
 using System.Text.Json;
+using Api.Client.Services;
+using Moq;
 using Xunit;
 
 namespace ClientSpecs.Steps;
@@ -8,7 +10,7 @@ public class ClientSteps
 {
     private string _clientPhoneNumber = string.Empty;
     private string _dataClientPhoneNumber = string.Empty;
-    // private readonly ApiFactory _api = new();
+    private readonly ClientApiFactory _api = new();
     private HttpResponseMessage? _response;
     
     [Given(@"a client with phone number (.*)")]
@@ -26,20 +28,18 @@ public class ClientSteps
     [Given(@"client id (.*)")]
     public void GivenClientId(string clientId)
     {
-        //Mock<IDataClientService> service = new();
-        //service
-        //.Setup(s => s.GetClientIdByPhoneNumberAsync(_dataClientPhoneNumber))
-        //.ReturnAsync(clientId);
-        //_api.ClientService = service.Object;
-        ScenarioContext.StepIsPending();
+        Mock<IDataClientService> service = new();
+        service
+            .Setup(s => s.GetClientIdByPhoneNumberAsync(_dataClientPhoneNumber))
+            .ReturnsAsync(clientId);
+        _api.DataClientService = service.Object;
     }
     
     [When(@"I call client service")]
-    public void WhenICallClientService()
+    public async Task WhenICallClientService()
     {        
-        // HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
-        // _response = await client.GetAsync($"/api/v1/isbn?isbn={_isbn}");
-        ScenarioContext.StepIsPending();
+        HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
+        _response = await client.GetAsync($"/api/v1/client?phoneNumber={_clientPhoneNumber}");
     }
     
     [Then(@"I receive this (.*) as a response")]
@@ -48,6 +48,6 @@ public class ClientSteps
         await using Stream contentStream = await _response!.Content.ReadAsStreamAsync();
         JsonElement result = await JsonSerializer.DeserializeAsync<JsonElement>(contentStream);
 
-        Assert.Equal(clientIdResponse, result.GetProperty("Id").ToString());
+        Assert.Equal(clientIdResponse, result.GetProperty("clientId").ToString());
     }
 }
