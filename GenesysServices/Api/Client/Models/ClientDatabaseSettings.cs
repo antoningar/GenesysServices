@@ -1,8 +1,8 @@
 namespace Api.Client.Models;
 
-public record ClientDatabaseSettings(
-    string ConnectionString,
-    string DatabaseName,
-    string ClientCollectionName)
+public class ClientDatabaseSettings
 {
+    public string? ConnectionString { get; set; }
+    public string? DatabaseName { get; set; }
+    public string? ClientCollectionName { get; set; }
 }
