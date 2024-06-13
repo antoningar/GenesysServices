@@ -2,9 +2,10 @@
 Les Data Actions permettent de personnaliser les parcours clients de vos flux en récupérant des données éxterieur à l'organization Genesys Cloud.  
 Ce projet est une vitrine de possiblités technique pour récupérer des informations de différentes manière.  
 Features:  
-* [Water shortage](#watershortage)
-* [ISBN checker](#isbn-checker)
-* [Database](#db)
+* [REST calls : Water shortage](#watershortage)
+* [SOAP calls : ISBN checker](#isbn-checker)
+* [RPC : Découvert](#découvert)
+* [BDD : Database](#db)
 # WaterShortage
 Cette feature vise à montrer la possibilité d'utiliser des des services externes REST et à y ajouter les logiques métiers nécessaire pour renvoyer des donnees ciblées et pertinentes au flux.
 ## Cas d'utilisation
@@ -40,6 +41,22 @@ Avant d'utiliser un code ISBN au sein d'un flux, vous voulez verifier la validit
 | param | description | sample |
 | ----- | ----------- | ------ |
 | isISBN | boolean response | true |
+# Découvert
+Cette feature vise à montrer la possibilité da'appeler d'autres service via RPC.
+## Cas d'utilisation
+Vous voulez savoir si un de vos client a un solde à découvert.
+## Flux de données
+Un service RPC tourne localement et renvoi le solde du compte du client.
+## Endpoints
+/api/v1/overdrawn?clientId={clientId}
+#### intputs :
+| param | description | sample |
+| ----- | ----------- | ------ |
+| clientId | id du client | 1344532 |
+#### outputs :
+| param | description | sample |
+| ----- | ----------- | ------ |
+| isOverdrawn | boolean indiquant si le solde du compte est négatif | false |
 # DB
 Cette feature vise à montrer la possibilité d'utiliser directement une base de données (MongoDB ici).
 ## Cas d'utilisation

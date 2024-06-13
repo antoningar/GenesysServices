@@ -37,7 +37,7 @@ public class ClientSteps
     
     [When(@"I call client service")]
     public async Task WhenICallClientService()
-    {        
+    {
         HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
         _response = await client.GetAsync($"/api/v1/client?phoneNumber={_clientPhoneNumber}");
     }
