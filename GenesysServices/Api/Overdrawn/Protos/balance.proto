@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "OverdrawnClient";
+
+package overdrawn;
+
+service Balance {
+    rpc GetBalance (BalanceRequest) returns (BalanceResponse);
+}
+
+message BalanceRequest {
+    string clientId = 1;
+}
+
+message BalanceResponse {
+    float balance = 1;
+}

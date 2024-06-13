@@ -30,8 +30,8 @@ public class OverdrawnSteps
     {
         Mock<IOverdrawnService> service = new();
         service
-            .Setup(s => s.GetClientBalanceAsync(_clientId))
-            .ReturnsAsync(_clientBalance);
+            .Setup(s => s.GetClientBalance(_clientId))
+            .Returns(_clientBalance);
         _api.OverdrawnService = service.Object;
     }
 

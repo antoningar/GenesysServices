@@ -2,5 +2,5 @@ namespace Api.Overdrawn.Services;
 
 public interface IOverdrawnService
 {
-    public Task<float> GetClientBalanceAsync(string clientId);
+    public float GetClientBalance(string clientId);
 }

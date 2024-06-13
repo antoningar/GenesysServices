@@ -14,11 +14,11 @@ public static class OverdrawnApiBuilder
     
     public static void MapOverdrawnEndpoints(this WebApplication app, ApiVersionSet versionSet)
     {
-        app.MapGet("/api/v{apiVersion:apiVersion}/overdrawn", async Task<IResult> (string clientId, IOverdrawnService service) =>
+        app.MapGet("/api/v{apiVersion:apiVersion}/overdrawn", IResult (string clientId, IOverdrawnService service) =>
             {
                 try
                 {
-                    float balance = await service.GetClientBalanceAsync(clientId);
+                    float balance = service.GetClientBalance(clientId);
                     bool isOverdrawn = balance < 0;
                     return TypedResults.Ok(new {isOverdrawn});
                 }
