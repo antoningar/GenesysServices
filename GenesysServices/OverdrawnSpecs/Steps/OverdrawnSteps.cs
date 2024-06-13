@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Api.Overdrawn.Services;
 using Moq;
 using Xunit;
 
@@ -9,7 +10,7 @@ public class OverdrawnSteps
 {
     private string _clientId = string.Empty;
     private float _clientBalance;
-    // private readonly OverdrawnApiFactory _api = new();
+    private readonly OverdrawnApiFactory _api = new();
     private HttpResponseMessage? _response;
     
     [Given(@"a client (.*)")]
@@ -27,18 +28,18 @@ public class OverdrawnSteps
     [Given(@"my system already know this client")]
     public void GivenMySystemAlreadyKnowThisClient()
     {
-        // Mock<IOverdrawnService> service = new();
-        // service
-        //     .Setup(s => s.IsClientOverdrawnAsync(_clientId))
-        //     .ReturnsAsync(_clientBalance);
-        // _api.OverdrawnService = service.Object;
+        Mock<IOverdrawnService> service = new();
+        service
+            .Setup(s => s.GetClientBalanceAsync(_clientId))
+            .ReturnsAsync(_clientBalance);
+        _api.OverdrawnService = service.Object;
     }
 
-    [When(@"I check if this cliet is overdrawm")]
-    public async Task WhenICheckIfThisClietIsOverdrawm()
+    [When(@"I check if this cliet is overdrawn")]
+    public async Task WhenICheckIfThisClietIsOverdrawn()
     {
-        // HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
-        // _response = await client.GetAsync($"/api/v1/overdrawn?clientId={_clientId}");
+        HttpClient client = _api.CreateDefaultClient(new Uri("http://localhost/"));
+        _response = await client.GetAsync($"/api/v1/overdrawn?clientId={_clientId}");
     }
 
     [Then(@"I got response (.*)")]

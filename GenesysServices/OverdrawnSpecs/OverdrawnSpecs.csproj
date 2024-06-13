@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.6" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
         <PackageReference Include="Moq" Version="4.20.70" />
         <PackageReference Include="Reqnroll.xUnit" Version="2.0.3" />
@@ -23,6 +24,9 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="Features\*.feature" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Api\Api.csproj" />
     </ItemGroup>
 
 </Project>

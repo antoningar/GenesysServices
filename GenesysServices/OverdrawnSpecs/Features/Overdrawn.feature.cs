@@ -93,13 +93,13 @@ namespace OverdrawnSpecs.Features
         [Xunit.InlineDataAttribute("2", "0", "false", new string[0])]
         [Xunit.InlineDataAttribute("3", "-100", "true", new string[0])]
         [Xunit.InlineDataAttribute("4", "-.1", "true", new string[0])]
-        public async System.Threading.Tasks.Task IsClientOverdrawn(string clientId, string balance, string isOverdrawm, string[] exampleTags)
+        public async System.Threading.Tasks.Task IsClientOverdrawn(string clientId, string balance, string isOverdrawn, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("clientId", clientId);
             argumentsOfScenario.Add("balance", balance);
-            argumentsOfScenario.Add("isOverdrawm", isOverdrawm);
+            argumentsOfScenario.Add("isOverdrawn", isOverdrawn);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Is client overdrawn", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
@@ -121,10 +121,10 @@ this.ScenarioInitialize(scenarioInfo);
     await testRunner.AndAsync("my system already know this client", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 8
-    await testRunner.WhenAsync("I check if this cliet is overdrawm", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I check if this cliet is overdrawn", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 9
-    await testRunner.ThenAsync("I got response <isOverdrawn>", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.ThenAsync(string.Format("I got response {0}", isOverdrawn), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
